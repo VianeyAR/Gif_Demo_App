@@ -1,38 +1,45 @@
-import React, { useState } from "react"
+import { useState } from "react";
 import CategoriesList from "./CategoriesList"
+import GifsExpo from "../GifsExpo";
 
-const Categories = ({ categories = [], setCategories }) => {
-  const [inputValue, setInputValue] = useState("");
-  const handleInput = ({ target }) => {
-    setInputValue(target.value);
-  };
+const Categories = ({categories = [], setCategories}) => {
+    const [inputValue, setInputValue] =useState("")
 
-  const handleAddCategoryButton = () => {
-    if(!categories.includes(inputValue)){
-      setCategories([inputValue, ...categories])
-      setInputValue("")
+    const handleInput = ({target}) => {
+        setInputValue(target.value)
     }
-  };
-  return (
-    <>
-      <input
-        onChange={(e) => handleInput(e)}
-        placeholder="Escribe el nombre de la categoria"
-        type="text"
-        value={inputValue}
+
+
+    const handleAddCategoryButton = () => {
+        if (!categories.includes(inputValue)){
+            setCategories([inputValue, ...categories])
+        setInputValue("")
+        }
+    }
+
+    return (
+        <>
+        <input
+      onChange={(e) => handleInput(e)} 
+      placeholder="Write category name"
+      type="text"
+      value={inputValue} 
       />
-      <button 
-      className="btn btn-primary btn-sm ms-2 mb-1"
+      <button
+      className="btn btn-primary btn-sm ms-2"
       onClick={handleAddCategoryButton}
       type="button"
       >
         Add
       </button>
-
       <br />
-      <CategoriesList categories={categories} />
-    </>
-  )
+      <CategoriesList 
+       categories={categories} 
+       setCategories={setCategories}/>
+       <hr />
+       <GifsExpo categories={categories} />
+      </>
+    )
 }
 
-export default Categories;
+export default Categories
